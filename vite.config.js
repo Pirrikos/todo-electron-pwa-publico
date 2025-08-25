@@ -2,28 +2,27 @@ import { defineConfig } from 'vite'
 import react from '@vitejs/plugin-react'
 import { VitePWA } from 'vite-plugin-pwa'
 
-// Hacemos la app instalable (PWA) y válida en file:// y en hosting
+// En GitHub Pages la app vive bajo /todo-electron-pwa-publico/
+// Usamos una variable de entorno para fijar base en CI.
+const isPages = process.env.GITHUB_PAGES === 'true'
+const base = isPages ? '/todo-electron-pwa-publico/' : './'
+
 export default defineConfig({
-  base: './',
+  base,
   plugins: [
     react(),
     VitePWA({
-      // registra el SW automáticamente y lo actualiza
       registerType: 'autoUpdate',
       injectRegister: 'auto',
-      // habilita PWA también en dev para poder probarlo
-      devOptions: { enabled: true },
-      // Manifest básico; los iconos los añadimos luego (opcional ahora)
+      devOptions: { enabled: false }, // en CI no hace falta dev PWA
       manifest: {
         name: 'Mis Tareas',
         short_name: 'Tareas',
-        start_url: './',
+        start_url: base,
         display: 'standalone',
         background_color: '#ffffff',
         theme_color: '#2563eb',
-        icons: [
-          // (en el siguiente paso te doy los iconos; por ahora puede quedar vacío)
-        ]
+        icons: []
       }
     })
   ],
