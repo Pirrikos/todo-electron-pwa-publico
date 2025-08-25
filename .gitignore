@@ -1,0 +1,22 @@
+# Dependencias
+node_modules/
+
+# Builds locales
+dist/
+dev-dist/
+
+# Salida de Electron (muy pesada)
+release/
+release/**
+
+# Desempaquetado de Electron
+**/win-unpacked/
+**/*.exe
+**/*.blockmap
+
+# Sistemas/editores
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/*
+!.vscode/extensions.json

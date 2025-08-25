@@ -1,0 +1,5 @@
+@import "tailwindcss";
+
+/* toque base opcional */
+:root { color-scheme: light; }
+body { @apply bg-slate-50 text-slate-900; }
